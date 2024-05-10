@@ -49,7 +49,6 @@ Route::middleware('loginUser')->group(function () {
     Route::post("/cap-nhat-tai-khoan", [LoginController::class, "UpdateMyAccount"])->name('UpdateMyAccount.login');
     Route::post('cap-nhat-so-luong-tang/{productId}', [ShoppingController::class, "increasePrice"])->name("increasePrice"); // tăng số lượng sản phẩm 
 
-
 });
 
 //Login admin 
