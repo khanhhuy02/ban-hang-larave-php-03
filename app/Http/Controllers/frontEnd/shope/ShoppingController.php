@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontEnd\shope;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Coupons;
@@ -15,12 +16,27 @@ use Illuminate\Support\Facades\Session;
 
 class ShoppingController extends Controller
 {
-    public function shop()
+    public function shop($take = null)
     {
-        $titlePass = "Cửa hàng";
-        return view("frontEnd/shop/shop", [
-            "titlePass" => $titlePass
-        ]);
+        if ($take == null) {
+            $list = Product::take(20)->get();
+            $titlePass = "Cửa hàng";
+            return view("frontEnd/shop/shop", [
+                "titlePass" => $titlePass,
+                "list" => $list,
+            ]);
+        } else {
+            // $list = Product::take(20)->get();\
+            $id_cate = Category::where("alias_sp", $take)->first();
+            if ($id_cate) {
+               $list = Product::where('categories_id',$id_cate->id)->take(20)->get();
+            }
+            $titlePass = "Cửa hàng";
+            return view("frontEnd/shop/shop", [
+                "titlePass" => $titlePass,
+                "list" => $list,
+            ]);
+        }
     }
 
 

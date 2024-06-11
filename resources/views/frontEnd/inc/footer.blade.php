@@ -422,7 +422,7 @@
          $('.clickcoupons').click(function(e) {
 
              e.preventDefault();
-             var code = $(this).closest('.product_data').find('.coupons').val();
+             var code = $(this).closest('.product_data').find('.coupons').val(); 
 
 
 

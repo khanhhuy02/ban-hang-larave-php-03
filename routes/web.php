@@ -34,7 +34,7 @@ Route::get('/', [HomeController::class, "index"])->name('home');
 Route::get('/gioi-thieu', [HomeController::class, "about"]);
 Route::get('/tin-tuc', [HomeController::class, "blog"]);
 Route::get('/lien-he', [HomeController::class, "contact"]);
-Route::get('/{alias}/{alias_sp}', [HomeController::class, "detailedProducts"])->name('detailed.products');
+Route::get('san-pham/{alias}/{alias_sp}', [HomeController::class, "detailedProducts"])->name('detailed.products');
 
 //Login user 
 Route::get("/dang-nhap", [LoginController::class, "login"])->name('login.login');
@@ -57,6 +57,7 @@ Route::post("/admin/dang-nhap/admin", [LoginController::class, "PostloginAdmin"]
 Route::post('giam-gia-thanh-cong', [ShoppingController::class, "coupons"])->name("cartCoupons");
 //của hàng 
 Route::get('/cua-hang', [ShoppingController::class, "shop"]);
+Route::get('/cua-hang/{cate}', [ShoppingController::class, "shop"]);
 Route::get('/gio-hang', [ShoppingController::class, "cart"])->name('cart');
 Route::post('them-vao-gio', [ShoppingController::class, "addTocart"])->name("addTocart");
 Route::delete('delete-cart/{productId}', [ShoppingController::class, "deleteToCart"])->name("deleteToCart");
