@@ -11,7 +11,7 @@
 
                 @foreach($category as $key => $item)
                 <div class=" swiper-slide">
-                    <a class='category-inner ' href='/cua-hang'>
+                    <a class='category-inner ' href='/cua-hang/{{$item->alias_sp}}'>
                         <div class="category-single-item">
                             <img src="{{asset('admin/images/icon')}}/{{$item->icon}}" alt=""  width="70%" height="80%">
                             <span class="title">{{$item->names}}</span>
@@ -81,7 +81,7 @@
                                     </div>
 
                                     <div class="content">
-                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias,'alias_sp'=> $item->alias_sp ])}}">{{$item->name}} </a>
+                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias_sp,'alias_sp'=> $item->alias_sp ])}}">{{$item->name}} </a>
                                         </h5>
                                         <span class="price">
                                             <span class="new">{{$item->price_new}}</span>

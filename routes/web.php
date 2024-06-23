@@ -57,7 +57,8 @@ Route::post("/admin/dang-nhap/admin", [LoginController::class, "PostloginAdmin"]
 Route::post('giam-gia-thanh-cong', [ShoppingController::class, "coupons"])->name("cartCoupons");
 //của hàng 
 Route::get('/cua-hang', [ShoppingController::class, "shop"]);
-Route::get('/cua-hang/{cate}', [ShoppingController::class, "shop"]);
+Route::get('/cua-hang/{alias}', [ShoppingController::class, "shop"])->name("shop-cate");
+Route::get('/cua-hang/{alias}/{barnd_alias}', [ShoppingController::class, "shop"])->name("shop-cate-brand");
 Route::get('/gio-hang', [ShoppingController::class, "cart"])->name('cart');
 Route::post('them-vao-gio', [ShoppingController::class, "addTocart"])->name("addTocart");
 Route::delete('delete-cart/{productId}', [ShoppingController::class, "deleteToCart"])->name("deleteToCart");

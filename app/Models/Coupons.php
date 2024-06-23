@@ -10,4 +10,5 @@ class Coupons extends Model
     use HasFactory;
     protected $table = 'coupons';
     protected $fillable = ['id','name','code','reduce','quantity','amount_used','date_start','date_end','status'];
+    
 }

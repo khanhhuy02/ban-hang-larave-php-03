@@ -1,8 +1,8 @@
 <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
-        <button class="offcanvas-close"></button>
-        <div class="inner customScroll">
+    <button class="offcanvas-close"></button>
+    <div class="inner customScroll">
 
-            <div class="offcanvas-menu mb-20px">
+        <!-- <div class="offcanvas-menu mb-20px">
                 <ul>
                     <li><a href="#"><span class="menu-text">Home</span></a>
                         <ul class="sub-menu">
@@ -90,56 +90,68 @@
                         </ul>
                     </li>
                     <li><a href='contact.html'>Contact Us</a></li>
-                </ul>
-            </div>
-            <!-- OffCanvas Menu End -->
+                </ul> -->
 
-            <!-- Language Currency start -->
-            <div class="offcanvas-userpanel mt-8">
-                <ul>
-                    <!-- Language Start -->
-                    <li class="offcanvas-userpanel__role">
-                        <a href="#">English <i class="ion-ios-arrow-down"></i></a>
-                        <ul class="user-sub-menu">
-                            <li><a class="current" href="#">English</a></li>
-                            <li><a href="#"> Italiano</a></li>
-                            <li><a href="#"> Français</a></li>
-                            <li><a href="#"> Filipino</a></li>
-                        </ul>
-                    </li>
-                    <!-- Language End -->
-                    <!-- Currency Start -->
-                    <li class="offcanvas-userpanel__role">
-                        <a href="#">USD $ <i class="ion-ios-arrow-down"></i></a>
-                        <ul class="user-sub-menu">
-                            <li><a class="current" href="#">USD $</a></li>
-                            <li><a href="#">EUR €</a></li>
-                            <li><a href="#">POUND £</a></li>
-                            <li><a href="#">FRANC ₣</a></li>
-                        </ul>
-                    </li>
-                    <!-- Currency End -->
-                </ul>
-            </div>
-            <!-- Language Currency End -->
-            <div class="offcanvas-social mt-auto">
-                <ul>
-                    <li>
-                        <a href="#"><i class="ion-social-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="ion-social-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="ion-social-google"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="ion-social-youtube"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="ion-social-instagram"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+        <ul>
+            <li>
+                <a href="/">Trang chủ</a>
+            </li>
+            <li><a href="/cua-hang">Sản Phẩm</a></li>
+            <li><a href="/tin-tuc">Tin Tức</a></li>
+            <li><a href='/gioi-thieu'>Giới thiệu</a></li>
+            <li><a href='/lien-he'>Liên hệ</a></li>
+
+        </ul>
     </div>
+    <!-- OffCanvas Menu End -->
+
+    <!-- Language Currency start -->
+    <div class="offcanvas-userpanel mt-8">
+        <ul>
+            <!-- Language Start -->
+            <li class="offcanvas-userpanel__role">
+                <a href="#">English <i class="ion-ios-arrow-down"></i></a>
+                <ul class="user-sub-menu">
+                    <li><a class="current" href="#">English</a></li>
+                    <li><a href="#"> Italiano</a></li>
+                    <li><a href="#"> Français</a></li>
+                    <li><a href="#"> Filipino</a></li>
+                </ul>
+            </li>
+            <!-- Language End -->
+            <!-- Currency Start -->
+            <li class="offcanvas-userpanel__role">
+                <a href="#">USD $ <i class="ion-ios-arrow-down"></i></a>
+                <ul class="user-sub-menu">
+                    <li><a class="current" href="#">USD $</a></li>
+                    <li><a href="#">EUR €</a></li>
+                    <li><a href="#">POUND £</a></li>
+                    <li><a href="#">FRANC ₣</a></li>
+                </ul>
+            </li>
+            <!-- Currency End -->
+        </ul>
+    </div>
+    <!-- Language Currency End -->
+    <div class="offcanvas-social mt-auto">
+        <ul>
+            <li>
+                <a href="#"><i class="ion-social-facebook"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ion-social-twitter"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ion-social-google"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ion-social-youtube"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ion-social-instagram"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>

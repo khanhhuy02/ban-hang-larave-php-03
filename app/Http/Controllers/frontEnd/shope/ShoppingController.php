@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontEnd\shope;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -16,26 +17,87 @@ use Illuminate\Support\Facades\Session;
 
 class ShoppingController extends Controller
 {
-    public function shop($take = null)
+    // public function shop($take = null)
+    // {
+    //     if ($take == null) {
+    //         $category = Category::all();
+
+    //         $list = Product::take(20)->get();
+    //         $titlePass = "Cửa hàng";
+    //         return view("frontEnd/shop/shop", [
+    //             "titlePass" => $titlePass,
+    //             "list" => $list,
+    //             "category" =>  $category
+    //         ]);
+    //     } else {
+    //         $category = Category::all();
+
+    //         // $list = Product::take(20)->get();\
+    //         $id_cate = Category::where("alias_sp", $take)->first();
+    //         if ($id_cate) {
+    //             $list = Product::where('categories_id', $id_cate->id)->take(20)->get();
+    //         }
+    //         $titlePass = "Cửa hàng";
+    //         return view("frontEnd/shop/shop", [
+    //             "titlePass" => $titlePass,
+    //             "list" => $list,
+    //             "category" =>  $category
+
+    //         ]);
+    //     }
+    // }
+
+
+    public function shop($take = null, $barnd_alias = null)
     {
-        if ($take == null) {
-            $list = Product::take(20)->get();
+        if ($take == null && $barnd_alias == null) {
+            // tong san pham 
+            $totalProduct = Product::count();
             $titlePass = "Cửa hàng";
+            $category = Category::all();
+            $list = Product::take(10)->get();
+
+            $brand = Brand::all();
+
             return view("frontEnd/shop/shop", [
                 "titlePass" => $titlePass,
                 "list" => $list,
+                "brand" =>  $brand,
+                'totalProduct' => $totalProduct
             ]);
         } else {
-            // $list = Product::take(20)->get();\
-            $id_cate = Category::where("alias_sp", $take)->first();
-            if ($id_cate) {
-               $list = Product::where('categories_id',$id_cate->id)->take(20)->get();
-            }
             $titlePass = "Cửa hàng";
-            return view("frontEnd/shop/shop", [
-                "titlePass" => $titlePass,
-                "list" => $list,
-            ]);
+            $category = Category::all();
+            $id_cate = Category::where('alias_sp', $take)->first();
+            if ($id_cate == true && $barnd_alias == null) {
+                $brand = Brand::where("categories_id", $id_cate->id)->get();
+                $list = Product::take(20)->get();
+                // tong san pham 
+                $totalProduct = Product::where("categories_id", $id_cate->id)->count();
+                $titlePass = "Cửa hàng";
+                return view("frontEnd/shop/shop", [
+                    "titlePass" => $titlePass,
+                    "list" => $list,
+                    "category" =>  $category,
+                    "brand" =>  $brand,
+                    'totalProduct' => $totalProduct
+
+                ]);
+            } else {
+                $brand = Brand::where("categories_id", $id_cate->id)->get();
+                $brands = Brand::where("alias", $barnd_alias)->first();
+                $list = Product::where('categories_id', $id_cate->id)->where('brands_id', $brands->id)->take(20)->get();
+              // tong san pham 
+              $totalProduct = Product::where("categories_id", $id_cate->id)->where('brands_id', $brands->id)->count();
+                return view("frontEnd/shop/shop", [
+                    "titlePass" => $titlePass,
+                    "list" => $list,
+                    "category" =>  $category,
+                    "brand" =>  $brand,
+                    'totalProduct' => $totalProduct
+
+                ]);
+            }
         }
     }
 
