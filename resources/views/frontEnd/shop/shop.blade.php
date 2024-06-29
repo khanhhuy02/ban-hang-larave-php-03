@@ -48,8 +48,8 @@
                                 <option data-display="Tất cả sản phẩm">Tất cả sản phẩm</option>
                                 <!-- <option value="1"> Name, A to Z</option>
                                 <option value="2"> Name, Z to A</option> -->
-                                <option value="3"> Giá cao đến thấp</option>
-                                <option value="4"> Giá thấp đến cao</option>
+                                <option value="?gia=desc" class="price_high_to_low">Giá cao đến thấp</option>
+                                <option value="?gia=asc" class="price_low_to_high"> Giá thấp đến cao </option>
                             </select>
 
                         </div>
@@ -125,14 +125,14 @@
                             <ul>
                                 @foreach($brand as $key => $item)
                                 <li>
-                
+
                                     <a href="{{route('shop-cate-brand',['alias'=> $item->categories->alias_sp,'barnd_alias'=> $item->alias])}}" class="selected"><img src="{{asset('admin/images/icon')}}/{{$item->icon}}" alt="" width="100"> </a>
                                 </li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
-  
+
                 </div>
             </div>
         </div>
@@ -140,4 +140,24 @@
 </div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.shop-sort').on('change', function(e) {
+            e.preventDefault()
+            var selectedOption = $(this).find(':selected');
+            var selectedText = selectedOption.val();
+            console.log(window.location);
+            if(selectedText !=0){
+                var url = selectedText 
+                window.location.replace(url)
+            }
+           
+
+
+        });
+    });
+</script>
 @endsection

@@ -38,29 +38,5 @@ class ApiCategoryController extends Controller
         };
     }
 
-    // public function store(Request $request)
-    // {
-
-    //     $Category = Category::create([
-    //         'names' => $request->names,
-    //         'icon' => $request->icon,
-    //         'location' => $request->location,
-    //         'alias' => $request->alias,
-    //         'status' => $request->status,
-    //         'classify' => $request->classify,
-
-    //     ]);
-
-    //     if ($Category) {
-
-    //         $data = [
-    //             'status' => $Category,
-    //             'message' => 'đã thêm thành công'
-    //         ];
-    //         return response()->json($data, 404);
-    //     };
-    // }
-
-
 
 }

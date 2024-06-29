@@ -78,36 +78,36 @@
                         <div class="QA_table mb_30">
 
                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
-                                <table class="table lms_table_active dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 1142px;">
+                                <table class="table lms_table_active dataTable no-footer dtr-inline table-all-product" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 1142px;">
                                     <thead>
                                         <tr role="row">
                                             <!-- <th scope="col" class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 116px;" aria-sort="ascending" >STT</th> -->
+                                            <th scope="col" class="sorting"  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 102px;" aria-label="Category: activate to sort column ascending"></th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 173px;" aria-label="Category: activate to sort column ascending">Tên</th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Hình ảnh</th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 161px;" aria-label="Lesson: activate to sort column ascending">Giá cũ</th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 165px;" aria-label="Teacher: activate to sort column ascending">Giá mới</th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 161px;" aria-label="Lesson: activate to sort column ascending">Loại</th>
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 102px;" aria-label="Enrolled: activate to sort column ascending">Kho hàng</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 102px;" aria-label="Enrolled: activate to sort column ascending">Trạng thái</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
-
                                         @foreach ($dataList as $item)
 
-                                        <tr role="row" class="odd">
+                                        <tr role="row" class="odd" id="delete-product{{$item->id}}" style="width: 20px;">
+                                            <td>
+                                                <input type="checkbox" value="{{$item->id}}" class="checkbox-delete">
+                                            </td>
                                             <td>{{$item->name}}</a></td>
                                             <td><img src="{{asset('admin/images/product')}}/{{$item->image}}" alt="" style="width: 100%;"></td>
                                             <td>{{$item->price_new}}</td>
                                             <td>{{$item->price_old}}</td>
 
-                                     
-                                            <td>{{$item->categories->names}}</td>
-                                      
 
-                                            <td></td>
+                                            <td>{{$item->categories->names}}</td>
+
+
                                             <td>còn hàng</td>
                                             <td>
 
@@ -120,13 +120,16 @@
                                                     sửa
                                                 </a>
                                             </td>
-
                                         </tr>
                                         @endforeach
+                                        <tr>
+                                            <td>
 
+                                                <input type="submit" class="btn btn-danger click-delete" value="Xóa" style="width: 200px;">
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -138,5 +141,48 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.click-delete').click(function() {
+            var array_delete = []; // Khởi tạo mảng rỗng
+
+            $('.checkbox-delete:checked').each(function() {
+                var delete_product = $(this).val();
+                array_delete.push(delete_product);
+            });
+
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            });
+
+            $.ajax({
+                method: "get",
+                // type:"delete",
+                url: "{{route('product.deteleArray')}}",
+                data: {
+                    'array_delete': array_delete,   
+                },
+
+                success: function(responsive) {
+                    // window.location.reload();
+                    $.each(array_delete,function (key,val) {
+                        $('#delete-product'+val).remove();
+                    })
+                },
+                error: function(responsive) {
+
+
+                }
+            })
+
+        });
+
+    })
+</script>
 
 @endsection

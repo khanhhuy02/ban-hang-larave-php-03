@@ -15,13 +15,24 @@ class AdminProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+    public function deteleArray(Request $request)
+    {
+        $delete_array =  $request->array_delete;
+        Product::whereIn('id', $delete_array)->delete();
+        return response()->json(["success" => 'xóa thành công']);
+    }
+
     public function index()
     {
         $titlePass = "Sản phẩm";
+
         $category_products =  Category::all();
         $category_brand =  Brand::all();
         $dataList = Product::all();
         // $products = DB::table("listproducts")->get();
+
 
         return view('backEnd/product/list', [
             'titlePass' => $titlePass,
@@ -171,11 +182,10 @@ class AdminProductController extends Controller
                 $data['sub_image'] = implode(',', $sub_fileNames);
             } else {
                 $existingProduct = Product::where("id", $id)->first();
-                foreach ( $existingProduct as $existing_subProduct){
+                foreach ($existingProduct as $existing_subProduct) {
                     $file_subName = $existing_subProduct->sub_image ?? '';
                 }
                 $data['sub_image'] = implode(',', $file_subName);
-
             }
         } else {
             $existingProduct = Product::where("id", $id)->first();
@@ -209,6 +219,7 @@ class AdminProductController extends Controller
 
     public function destroy($id)
     {
+
         $product = Product::find($id);
         $product->delete();
         return redirect('admin/product/list');

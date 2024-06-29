@@ -18,7 +18,7 @@ class AuthAminUser
     {
 
         
-            if (Auth::check() && Auth::user()->role == 0) {
+            if (Auth::check() && Auth::user()->role == 0 || Auth::user()->role == 1) {
     
                 return $next($request);
             }

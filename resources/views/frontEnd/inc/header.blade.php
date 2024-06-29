@@ -169,7 +169,7 @@
                             <!-- Single Wedge End -->
                             <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                 <i class="icon-handbag"></i>
-                                <span class="header-action-num">01</span>
+                                <span class="header-action-num header-action-totalQuantity"></span>
                                 <!-- <span class="cart-amount">€30.00</span> -->
                             </a>
                             <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
@@ -254,33 +254,30 @@
             </div>
             <div class="body customScroll">
                 <ul class="minicart-product-list">
+                    @php $totalAll = 0;
+                    $totalQuantity = 0;
+
+                    @endphp
+                    @foreach ($cartItems as $productId => $cartItem)
+                    @php
+                    $value = $cartItems->firstWhere('id', $productId);
+         
+                    @endphp
                     <li>
                         <a class='image' href='single-product.html'><img src="{{asset('assets/images/product-image/1.jpg')}}" alt="Cart product Image"></a>
                         <div class="content">
-                            <a class='title' href='single-product.html'>Walnut Cutting Board</a>
-                            <span class="quantity-price">Số lượng<span class="amount"> 10</span></span>
-                            <span class="quantity-price">Giá <span class="amount"> 100.000.000</span> VND</span>
+                            <a class='title' href='single-product.html'>{{$value->name}}</a>
+                            <span class="quantity-price">Số lượng<span class="amount"></span>{{$cartItem['quantity']}}</span>
+                            <span class="quantity-price">Giá <span class="amount">{{ number_format($value->price_new, 0, ',', '.')}}</span> VND</span>
                             <a href="#" class="remove"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </li>
-                    <li>
-                        <a class='image' href='single-product.html'><img src="{{asset('assets/images/product-image/2.jpg')}}" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a class='title' href='single-product.html'>Lucky Wooden Elephant</a>
-                            <span class="quantity-price">Số lượng<span class="amount"> 10</span></span>
-                            <span class="quantity-price">Giá <span class="amount"> 100.000.000</span> VND</span>
-                            <a href="#" class="remove"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                    </li>
-                    <li>
-                        <a class='image' href='single-product.html'><img src="{{asset('assets/images/product-image/3.jpg')}}" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a class='title' href='single-product.html'>Fish Cut Out Set</a>
-                            <span class="quantity-price">Số lượng<span class="amount"> 10</span></span>
-                            <span class="quantity-price">Giá <span class="amount"> 100.000.000</span> VND</span>
-                            <a href="#" class="remove"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                    </li>
+                    @php
+                    $totalAll += $cartItem['total'];
+                    $totalQuantity += $cartItem['quantity'];
+                    @endphp
+
+                    @endforeach
                 </ul>
             </div>
             <div class="foot">
@@ -289,18 +286,18 @@
                         <tbody>
                             <tr>
                                 <td class="text-start">Số Lượng :</td>
-                                <td class="text-end">30</td>
+                                <td class="text-end totalQuantity " ><?= $totalQuantity ?></td>
                             </tr>
                             <tr>
                                 <td class="text-start">Tổng Giá :</td>
-                                <td class="text-end theme-color"><span class="amount">400.000.000 VND</span></td>
+                                <td class="text-end theme-color"><span class="amount"><?= $totalAll ?></span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="buttons">
-                    <a class='btn btn-dark btn-hover-primary mb-30px' href='cart.html'>Giỏ Hàng</a>
-                    <a class='btn btn-outline-dark current-btn' href='checkout.html'>Thanh Toán</a>
+                    <a class='btn btn-dark btn-hover-primary mb-30px' href='{{route("cart")}}'>Giỏ Hàng</a>
+                    <a class='btn btn-outline-dark current-btn' href='{{route("cartCheckout")}}'>Thanh Toán</a>
                 </div>
                 <p class="minicart-message">Giao hàng miễn phí trên toàn quốc</p>
             </div>
@@ -326,3 +323,8 @@
     // include "bander/slider-home.php";
     ?>
     <!--Slider Home End -->
+
+    <script>
+        var totalQuantity = document.querySelector('.totalQuantity').textContent;
+       document.querySelector('.header-action-totalQuantity').innerHTML = totalQuantity;
+    </script>

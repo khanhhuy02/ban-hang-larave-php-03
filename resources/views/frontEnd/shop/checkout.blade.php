@@ -99,10 +99,10 @@
                                 <div class="your-order-middle">
                                     <ul>
                                         @php $totalOrder = 0; $totaCoupon = 0;@endphp
-                                        @foreach($cartItem as $productId => $itemCart)
+                                        @foreach($cartItem['cart'] as $productId => $itemCart)
 
                                         @php
-                                        $product = $products->firstWhere('id', $productId);
+                                        $product = $cartItem['product_id_all']->firstWhere('id', $productId);
                                         @endphp
 
                                         <li>

@@ -160,9 +160,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                          
                                 @foreach ($cartItems as $productId => $cartItem)
                                 @php
-                                $product = $products->firstWhere('id', $productId);
+                                $product = $cartItems->firstWhere('id', $productId);
         
                                 @endphp
                                 <tr class="product_data">

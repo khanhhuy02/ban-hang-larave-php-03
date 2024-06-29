@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\shop\orderItem;
+use App\Models\User;
 
 class order extends Model
 {
@@ -17,5 +18,10 @@ class order extends Model
     public function order_items(): belongsTo
     {
         return $this->belongsTo(orderItem::class,'id','orders_id');
+    }
+
+    public function userid(): belongsTo
+    {
+        return $this->belongsTo(User::class,'id','users_id');
     }
 }

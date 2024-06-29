@@ -10,7 +10,7 @@ use App\Http\Controllers\backEnd\AdminCategoryController;
 use App\Http\Controllers\backEnd\AdminBrandController;
 use App\Http\Controllers\backEnd\AdminProductController;
 use App\Http\Controllers\backEnd\AdminCouponsController;
-
+use App\Http\Controllers\backEnd\AdminOrderController;
 use App\Http\Controllers\login\LoginController;
 use App\Models\shop\cart;
 
@@ -58,6 +58,7 @@ Route::post('giam-gia-thanh-cong', [ShoppingController::class, "coupons"])->name
 //của hàng 
 Route::get('/cua-hang', [ShoppingController::class, "shop"]);
 Route::get('/cua-hang/{alias}', [ShoppingController::class, "shop"])->name("shop-cate");
+// Route::get('/cua-hang/{alias}/', [ShoppingController::class, "shop"])->name("shop-cate-filter");
 Route::get('/cua-hang/{alias}/{barnd_alias}', [ShoppingController::class, "shop"])->name("shop-cate-brand");
 Route::get('/gio-hang', [ShoppingController::class, "cart"])->name('cart');
 Route::post('them-vao-gio', [ShoppingController::class, "addTocart"])->name("addTocart");
@@ -102,6 +103,9 @@ Route::prefix('admin')->middleware('login')->group(function () {
             'destroy' => "product.destroy"
         ]
     );
+    Route::get('detele-array',[ AdminProductController::class, 'deteleArray'])->name('product.deteleArray');
     // list coupons
 
+    // order
+    Route::get('order/list',[ AdminOrderController::class, 'index'])->name('order.index');
 });

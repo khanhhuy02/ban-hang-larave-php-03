@@ -83,10 +83,12 @@
                                         <tr role="row">
                                             <!-- <th scope="col" class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 116px;" aria-sort="ascending" >STT</th> -->
                                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 173px;" aria-label="Category: activate to sort column ascending">Tên</th>
-                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Hình ảnh</th>
-                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Thứ tự</th>
-                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Phân quyền</th>
-                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending"></th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Địa chỉ</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Điện thoại</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Email</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Ghi chú</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Ngày mua</th>
+                                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88px;" aria-label="Price: activate to sort column ascending">Trạng thái</th>
 
 
                                         </tr>
@@ -94,16 +96,18 @@
                                     <tbody>
 
 
-                                        @foreach($cat as $key => $item)
+                                        @foreach($order as $key => $item)
                                         <tr role="row" class="odd">
-                                            <td>{{ $item->names }}</td>
-                                            <td><img src="{{asset('admin/images/icon')}}/{{$item->icon}}" alt=""></td>
-                                            <td>{{ $item->location }}</td>
-                                            <td>{{ $item->classify }}</td>
-                                            <td>
-                                                <a href="{{ route('editCat',['id' => $item->id]) }}" class="status_btn">sửa</a>
-                                            </td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->addess }}</td>
+                                            <td>{{ $item->phone }}</td>
+                                            <td>{{ $item->email }}</td>
 
+                                            <td>{{ $item->note }}</td>
+                                            <td>{{ $item->date }}</td>
+                                            <td>
+                                                <input type="submit" class="btn btn-primary" value="chi tiết" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$item->id}}">
+                                            </td>
                                         </tr>
                                         @endforeach
 
@@ -123,60 +127,50 @@
 
 
 <!-- form thêm sản phẩm -->
-
-<div class=" modal fade " id="addItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color:#ffdcdc;">
+@foreach($order as $item)
+<div class="modal fade" id="staticBackdrop-{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="margin-left: -100px;">
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content" style="width:800px">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Thêm Sản Phẩm</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Đơn hàng của {{ $item->name}}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row" action="{{ route('createCat') }}" method="post" enctype="multipart/form-data">
-                    @csrf
 
-                    <div class="mb-3 col-12">
-                        <label class="form-label">Tên Sản Phẩm</label>
-                        <input name="names" type="text" class="form-control">
-                    </div>
+                <table class="table">
+                    <thead>
+                        <th>Sản Phẩm</th>
+                        <th>Hình anh</th>
+                        <th>Số lượng</th>
+                        <th>Giá cả</th>
+                        <th>Tổng sản phẩm</th>
+                    </thead>
 
+                    <tbody>
+                        @foreach($itemOrder as $items)
+                        @if($items->orders_id === $item->id)
+                        <tr>
+                            <td style="width: 120px;">{{$items->products->name}}</td>
+                            <td><img src="{{asset('admin/images/product')}}/{{$items->products->image}}" alt=""></td>
+                            <td>{{$items->quantity}}</td>
+                            <td>{{$items->products->price_new}}</td>
+                            <td>{{$items->products->price_new * $items->quantity}} </td>
+                        </tr>
+                        @endif
+                        @endforeach
 
+                    </tbody>
+                </table>
 
-                    <div class="mb-3 col-12">
-                        <label class="form-label">hình ảnh</label>
-                        <input name="icon" type="file" class="form-control">
-                    </div>
-
-
-                    <div class="mb-3 col-12">
-                        <label class="form-label">Ẩn hiện</label> <br>
-                        <label for="">Ẩn</label>
-                        <input name="status" type="radio" value="0">
-                        <label for="">Hiện</label>
-                        <input name="status" type="radio" value="1" checked>
-                    </div>
-
-
-                    <div class="mb-3 col-6">
-                        <label class="form-label">Thứ tự</label>
-                        <input name="location" type="number" class="form-control">
-                    </div>
-
-
-                    <div class="mb-3 col-6">
-                        <label class="form-label">Phân quyền</label>
-                        <input name="classify" type="number" class="form-control">
-                    </div>
-
-
-                    <button type="submit" name="luu" class="btn btn-secondary mb-3">Tạo danh mục</button>
-                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary">In đơn</button>
             </div>
         </div>
     </div>
 </div>
-
-
+@endforeach
 
 </div>
 

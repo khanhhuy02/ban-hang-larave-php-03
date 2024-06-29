@@ -3,23 +3,42 @@
 namespace App\Http\Controllers\login;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\frontEnd\global\cartImplementsGolobal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\authLogin\UserInformations;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\shop\order;
 use App\Models\shop\orderItem;
+use Illuminate\Support\Facades\Session;
+
 
 class LoginController extends Controller
 {
 
-    public function login()
+    protected $cartGolobals;
+
+    public function __construct(cartImplementsGolobal $cartGolobals)
     {
+        $this->cartGolobals = $cartGolobals;
+    }
+
+    public function login()
+    {   
+        
+        // $cartItems = collect(Session::get('cart', []))->where('users_id', Auth::id())->toArray();
+        // $productIds = array_keys($cartItems);
+        // $products = Product::whereIn('id', $productIds)->get();
+        $cartItems = $this->cartGolobals->cartGolobal();
+
         $titlePass = "Đang nhập";
         return view("frontEnd/login/login", [
-            "titlePass" => $titlePass
+            "titlePass" => $titlePass,
+            'cartItems' => $cartItems,
+            // 'products' => $products,
         ]);
     }
 
@@ -77,7 +96,7 @@ class LoginController extends Controller
         $account = User::where("id", Auth::user()->id)->first();
         $showProduct = Order::where("users_id", Auth::user()->id)->get();
 
-
+        $cartItems = $this->cartGolobals->cartGolobal();
         $orderIds = $showProduct->pluck('id')->toArray();
       
 
@@ -89,6 +108,7 @@ class LoginController extends Controller
             'account' => $account,
             'order_items' => $order_items,
             'showProduct' => $showProduct,
+            'cartItems' => $cartItems,
         ]);
 
 
