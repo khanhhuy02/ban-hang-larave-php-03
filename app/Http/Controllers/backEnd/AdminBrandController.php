@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\StringHels;
+use Illuminate\Support\Facades\File;
 
 class AdminBrandController extends Controller
 {
@@ -120,17 +121,26 @@ class AdminBrandController extends Controller
         $StringHels = new StringHels();
         // $data['id'] = $request->id;
         $data['names'] = $request->names;
-
+        $random_number = uniqid();
+        $existingIcon = Brand::where("id", $id)->first(); // LẤY ID ẢNH CỦ 
         if ($request->hasFile('icon')) {
+
+            $existingIcon = $existingIcon->icon ?? '' ;
+            if ( $existingIcon !=="") {
+                if (File::exists(public_path('admin/images/product/' . $existingIcon))) {
+                    File::delete(public_path('admin/images/product/' . $existingIcon));
+                }
+            }
             $file = $request->file('icon');
             $fileName = $file->getClientOriginalName();
-            $file->move(public_path("admin/images/icon"), $fileName);
+            $randomfileName =  $random_number . '-icon-'. $fileName ;
+            $file->move(public_path("admin/images/icon"), $randomfileName);
         } else {
             $existingBrand = Brand::where("id", $id)->first();
-            $fileName = $existingBrand->icon ?? '';
+            $randomfileName = $existingBrand->icon ?? '';
         }
 
-        $data['icon'] = $fileName;
+        $data['icon'] = $randomfileName;
         $data['location'] = $request->location;
         $data['alias'] = $StringHels->generateAlias($data['names']);
         $data['categories_id'] = $request->categories_id;

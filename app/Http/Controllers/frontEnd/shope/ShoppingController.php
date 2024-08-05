@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Session;
 
 class ShoppingController extends Controller
 {
- 
-    
+
+
 
     protected $cartGolobals;
 
@@ -80,15 +80,14 @@ class ShoppingController extends Controller
         } else {
             $titlePass = "Cửa hàng";
             $category = Category::all();
-            $id_cate = Category::where('alias_sp', $take)->first();
+            $id_cate = Category::where('alias', $take)->first();
             if ($id_cate == true && $barnd_alias == null) {
                 $brand = Brand::where("categories_id", $id_cate->id)->get();
                 if (isset($_GET['gia'])) {
                     $price =  $_GET['gia'];
                     $list = Product::orderBy('price_new', $price)->take(20)->get();
-                }else{
+                } else {
                     $list = Product::take(20)->get();
-
                 }
                 // tong san pham 
                 $totalProduct = Product::where("categories_id", $id_cate->id)->count();
@@ -107,8 +106,7 @@ class ShoppingController extends Controller
                 if (isset($_GET['gia'])) {
                     $price =  $_GET['gia'];
                     $list = Product::where('categories_id', $id_cate->id)->where('brands_id', $brands->id)->orderBy('price_new', $price)->take(20)->get();
-                }
-                else {
+                } else {
                     $list = Product::where('categories_id', $id_cate->id)->where('brands_id', $brands->id)->take(20)->get();
                 }
                 // tong san pham 
@@ -179,7 +177,7 @@ class ShoppingController extends Controller
         // $products = Product::whereIn('id', $productIds)->get();
         $cartItems = $this->cartGolobals->cartGolobal();
 
-
+        // dd( $cartItems);
         return view("frontEnd/shop/cart", [
             "titlePass" => $titlePass,
             'cartItems' => $cartItems,
@@ -252,7 +250,7 @@ class ShoppingController extends Controller
         $titlePass = "Giỏ hàng";
         // $cartItem = cart::where('users_id', Auth::id())->get();
 
-    
+
         // $cartItems = collect(Ses sion::get('cart', []))->where('users_id', Auth::id())->toArray();
         // @dd($cartItem);
 

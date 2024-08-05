@@ -179,28 +179,23 @@
             <div class="tab-content description-review-bottom">
                 <div id="des-details2" class="tab-pane active">
                     <div class="product-anotherinfo-wrapper">
-                        <ul>
-                            <li><span><b>Màng hình</b></span> {{$listProduct->screen}}</li>
-                            <li><span><b>Hệ điều hành</b></span>{{$listProduct->operating_system}} </li>
-                            <li><span><b>Camera trước</b></span>{{$listProduct->camera_before}} </li>
-                            @if($listProduct->categories->names == "Điện thoại")
-                            <li><span><b>Camera sau</b></span>{{$listProduct->camera_after}} </li>
-                            <li><span><b>Sim</b></span>{{$listProduct->sim}} </li>
-                            @endif
-                            <li><span><b>Vi sử lý</b></span>{{$listProduct->chip}} </li>
-                            <li><span><b>Ram</b></span>{{$listProduct->ram}} </li>
-                            <li><span><b>Dung lượng</b></span>{{$listProduct->capacity}} </li>
-                            <li><span><b>Pin</b></span>{{$listProduct->pin}} </li>
-                            <li><span><b>Ra mắt</b></span>{{$listProduct->meeting_day}} </li>
-                        </ul>
+                        {!!$listProduct->information_engineering!!}
                     </div>
                 </div>
                 <div id="des-details1" class="tab-pane">
                     <div class="product-description-wrapper">
 
-                        <p>
+                        <style>
+                            table {
+                                width: 100%;
+
+                            }
+
+                            td{
+                                padding: 20px;
+                            }
+                        </style>
                             {!!$listProduct->description!!}
-                        </p>
                     </div>
                 </div>
                 <div id="des-details3" class="tab-pane">

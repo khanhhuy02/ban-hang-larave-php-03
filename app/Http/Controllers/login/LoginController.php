@@ -96,12 +96,11 @@ class LoginController extends Controller
         $account = User::where("id", Auth::user()->id)->first();
         $showProduct = Order::where("users_id", Auth::user()->id)->get();
 
+        // dd($showProduct);
         $cartItems = $this->cartGolobals->cartGolobal();
         $orderIds = $showProduct->pluck('id')->toArray();
-      
-
         $order_items = OrderItem::whereIn("orders_id", $orderIds)->get();
-        // dd($orderIds);
+        // dd( $order_items);
 
         return view("frontEnd/login/myAccount", [
             "titlePass" => $titlePass,

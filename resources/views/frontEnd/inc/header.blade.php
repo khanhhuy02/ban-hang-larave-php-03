@@ -169,7 +169,7 @@
                             <!-- Single Wedge End -->
                             <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                 <i class="icon-handbag"></i>
-                                <span class="header-action-num header-action-totalQuantity"></span>
+                                <span class="header-action-num header-action-totalQuantity">0</span>
                                 <!-- <span class="cart-amount">€30.00</span> -->
                             </a>
                             <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
@@ -236,7 +236,7 @@
         <!-- Header mobile-Bottom End -->
 
         <!-- Main main-Menu Start -->
-        @include ('frontEnd.inc.navbar.main-menu');
+        @include ('frontEnd.inc.navbar.main-menu')
         <!-- Main main-Menu End -->
 
     </div>
@@ -260,7 +260,7 @@
                     @endphp
                     @foreach ($cartItems as $productId => $cartItem)
                     @php
-                    $value = $cartItems->firstWhere('id', $productId);
+                    $value = $products->firstWhere('id', $productId);
          
                     @endphp
                     <li>

@@ -37,4 +37,6 @@ return array(
     'a1cfe24d14977df6878b9bf804af2d1c' => $vendorDir . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
     'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     '320163ac6b93aebe3dc25b60a0533d56' => $vendorDir . '/spatie/laravel-ignition/src/helpers.php',
+    '0d2003dfe35bf80b561ccb7d8df84933' => $baseDir . '/app/Http/Helpers/Post/PostHelpers.php',
+    '3816d9f83d7ae3b93d853184ad200fee' => $baseDir . '/app/Http/Helpers/Post/Post.php',
 );

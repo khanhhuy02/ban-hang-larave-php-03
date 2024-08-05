@@ -126,6 +126,7 @@
     </div>
 
     <script src="{{asset('admin/js/jquery1-3.4.1.min.js')}}"></script>
+    <script src="{{asset('/admin/js/slug.js')}}"></script>
 
     <script src="{{asset('admin/js/popper1.min.js')}}"></script>
 

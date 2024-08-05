@@ -1,43 +1,43 @@
 <nav class="sidebar">
-        <div class="logo d-flex justify-content-between">
-            <a class="large_logo" href="index.html"><img src="{{asset('admin/img/logo.png')}}" alt></a>
-            <a class="small_logo" href="index.html"><img src="{{asset('admin/img/mini_logo.png')}}" alt></a>
-            <div class="sidebar_close_icon d-lg-none">
-                <i class="ti-close"></i>
-            </div>
+    <div class="logo d-flex justify-content-between">
+        <a class="large_logo" href="index.html"><img src="{{asset('admin/img/logo.png')}}" alt></a>
+        <a class="small_logo" href="index.html"><img src="{{asset('admin/img/mini_logo.png')}}" alt></a>
+        <div class="sidebar_close_icon d-lg-none">
+            <i class="ti-close"></i>
         </div>
-        <ul id="sidebar_menu">
-            <li>
-                <a href="index.html" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/dashboard.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Analytic</span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="index_2.html" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/2.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Default </span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="index_3.html" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/3.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Dark </span>
-                    </div>
-                </a>
-            </li>
-            <!-- <h4 class="menu-text"><span>CUSTOM</span> <i class="fas fa-ellipsis-h"></i> </h4>
+    </div>
+    <ul id="sidebar_menu">
+        <li>
+            <a href="index.html" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/dashboard.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Analytic</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="index_2.html" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/2.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Default </span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="index_3.html" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/3.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Dark </span>
+                </div>
+            </a>
+        </li>
+        <!-- <h4 class="menu-text"><span>CUSTOM</span> <i class="fas fa-ellipsis-h"></i> </h4>
             <li class>
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="nav_icon_small">
@@ -72,51 +72,91 @@
                     <li><a href="gallery.html">Gallery</a></li>
                 </ul>
             </li> -->
-            <h4 class="menu-text"><span>Danh Sách Sản Phẩm </span> <i class="fas fa-ellipsis-h"></i> </h4>
-            <li class>
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/4.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Loại</span>
-                    </div>
-                </a>
-                <ul>
-                    <li><a href="{{route('cat.store')}}">Danh sách</a></li>
-                </ul>
-            </li>
+        <h4 class="menu-text"><span>Danh Sách Sản Phẩm </span> <i class="fas fa-ellipsis-h"></i> </h4>
+        <li class>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/4.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Loại</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{route('cat.store')}}">Danh sách</a></li>
+            </ul>
+        </li>
 
 
 
-            <li >
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/6.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Hãng</span>
-                    </div>
-                </a>
-                <ul>
-                    <li><a href="{{route('brand.store')}}">Danh sách</a></li>
-                </ul>
-            </li>
+        <li>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/6.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Hãng</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{route('brand.store')}}">Danh sách</a></li>
+            </ul>
+        </li>
 
-            <li >
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="nav_icon_small">
-                        <img src="{{asset('admin/img/menu-icon/8.svg')}}" alt>
-                    </div>
-                    <div class="nav_title">
-                        <span>Sản Phẩm</span>
-                    </div>
-                </a>
-                <ul>
-                    <li><a href="{{route('product.store')}}">Danh sách</a></li>
-                </ul>
-            </li>
-            <!-- <li class>
+        <li>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/8.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Sản Phẩm</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{route('product.store')}}">Danh sách</a></li>
+            </ul>
+        </li>
+
+        <li class>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('admin/img/menu-icon/16.svg')}}" alt>
+                </div>
+                <div class="nav_title">
+                    <span>Tin tức</span>
+                </div>
+            </a>
+            <ul>
+                <li>
+                    <a class="has-arrow" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{asset('admin/img/menu-icon/16.svg')}}" alt>
+                        </div>
+                        <div class="nav_title">
+                            <span>Thể loại tin tức</span>
+                        </div>
+                    </a>
+                    <ul>
+                        <li><a href="{{route('postCate.list')}}">Danh sách</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{asset('admin/img/menu-icon/16.svg')}}" alt>
+                        </div>
+                        <div class="nav_title">
+                            <span>Đăng bài tin tức</span>
+                        </div>
+                    </a>
+                    <ul>
+                        <li><a href="{{route('post.index')}}">Danh sách</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <!-- <li class>
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{asset('admin/img/menu-icon/16.svg')}}" alt>
@@ -141,7 +181,7 @@
                     </div>
                 </a>
             </li> -->
-            <!-- <h4 class="menu-text"><span>Elements</span> <i class="fas fa-ellipsis-h"></i> </h4>
+        <!-- <h4 class="menu-text"><span>Elements</span> <i class="fas fa-ellipsis-h"></i> </h4>
             <li class>
                 <a href="invoice.html" aria-expanded="false">
                     <div class="nav_icon_small">
@@ -348,5 +388,5 @@
                     <li><a href="vector_map.html">Vector Maps</a></li>
                 </ul>
             </li> -->
-        </ul>
-    </nav>
+    </ul>
+</nav>

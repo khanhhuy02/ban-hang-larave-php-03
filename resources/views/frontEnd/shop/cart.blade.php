@@ -3,6 +3,7 @@
 
 @section('conTenPass')
 <!-- breadcrumb-area start -->
+
 <div class="breadcrumb-area">
     <div class="container">
         <div class="row">
@@ -160,10 +161,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                          
-                                @foreach ($cartItems as $productId => $cartItem)
+                                @foreach ($cartItems['cart'] as $productId => $cartItem)
                                 @php
-                                $product = $cartItems->firstWhere('id', $productId);
+                                $product = $cartItems['product_id_all']->firstWhere('id', $productId);
         
                                 @endphp
                                 <tr class="product_data">

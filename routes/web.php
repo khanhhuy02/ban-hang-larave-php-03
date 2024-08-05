@@ -11,7 +11,10 @@ use App\Http\Controllers\backEnd\AdminBrandController;
 use App\Http\Controllers\backEnd\AdminProductController;
 use App\Http\Controllers\backEnd\AdminCouponsController;
 use App\Http\Controllers\backEnd\AdminOrderController;
+use App\Http\Controllers\backEnd\AdminPostCategoryController;
+use App\Http\Controllers\backEnd\AdminPostController;
 use App\Http\Controllers\login\LoginController;
+use App\Http\Middleware\ckeckAuthLogin;
 use App\Models\shop\cart;
 
 /*
@@ -52,7 +55,7 @@ Route::middleware('loginUser')->group(function () {
 });
 
 //Login admin 
-Route::get("/admin/dang-nhap/admin", [LoginController::class, "loginAdmin"])->name('loginAdmin.login');
+Route::get("/admin/dang-nhap/admin", [LoginController::class, "loginAdmin"])->name('loginAdmin.login')->middleware(ckeckAuthLogin::class);;
 Route::post("/admin/dang-nhap/admin", [LoginController::class, "PostloginAdmin"])->name('PostloginAdmin.login');
 Route::post('giam-gia-thanh-cong', [ShoppingController::class, "coupons"])->name("cartCoupons");
 //của hàng 
@@ -79,10 +82,10 @@ Route::prefix('admin')->middleware('login')->group(function () {
 
     //list admin vs user
 
-    Route::get('account/list',[AdminUserController::class, "index"])->name("account.list");
-    Route::get('account/list',[AdminUserController::class, "store"])->name("store.list");
-    Route::post('account/update/list',[AdminUserController::class, "create"])->name("createAcount");
-    Route::delete('account/list/{id}',[AdminUserController::class, "destroy"])->name("deleteAccount.list");
+    Route::get('account/list', [AdminUserController::class, "index"])->name("account.list");
+    Route::get('account/list', [AdminUserController::class, "store"])->name("store.list");
+    Route::post('account/update/list', [AdminUserController::class, "create"])->name("createAcount");
+    Route::delete('account/list/{id}', [AdminUserController::class, "destroy"])->name("deleteAccount.list");
 
     //list brand
     Route::resource('/brand/list', AdminBrandController::class)->names(
@@ -103,9 +106,24 @@ Route::prefix('admin')->middleware('login')->group(function () {
             'destroy' => "product.destroy"
         ]
     );
-    Route::get('detele-array',[ AdminProductController::class, 'deteleArray'])->name('product.deteleArray');
+    Route::get('detele-array', [AdminProductController::class, 'deteleArray'])->name('product.deteleArray');
     // list coupons
 
     // order
-    Route::get('order/list',[ AdminOrderController::class, 'index'])->name('order.index');
+    Route::get('order/list', [AdminOrderController::class, 'index'])->name('order.index');
+
+    Route::get('post/list', [AdminPostController::class, 'index'])->name('post.index');
+    Route::get('post/create', [AdminPostController::class, 'showPostcreate'])->name('post.showcre');
+    Route::post('post/create', [AdminPostController::class, 'Postcreate'])->name('post.create');
+    Route::get('post/edit/{id}', [AdminPostController::class, 'showPostEdit'])->name('post.showEdit');
+    Route::put('post/edit/{id}', [AdminPostController::class, 'PostUpdate'])->name('post.update');
+
+    Route::delete('post/delete/{id}', [AdminPostController::class, 'PostDelete'])->name('post.delete');
+
+    Route::get('post/category/list', [AdminPostCategoryController::class, 'index'])->name('postCate.list');
+    Route::get('post/category/show/edit/{id}', [AdminPostCategoryController::class, 'showEditcate'])->name('postCate.showEdit');
+    Route::put('post/category/show/edit/{id}', [AdminPostCategoryController::class, 'upEditcate'])->name('postCate.upEditcate');
+
+    Route::post('post/category/create', [AdminPostCategoryController::class, 'create'])->name('postCate.create');
+    Route::delete('post/category/delete/{id}', [AdminPostCategoryController::class, 'delete'])->name('postCate.delete');
 });

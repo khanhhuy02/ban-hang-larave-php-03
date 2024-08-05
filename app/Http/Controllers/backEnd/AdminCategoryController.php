@@ -3,13 +3,22 @@
 namespace App\Http\Controllers\backEnd;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\Post\PostHelpers;
+use App\Http\Helpers\StringSlugs\StringSlugHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StringHels;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 
 class AdminCategoryController extends Controller
 {
+    private $getPostDataImage;
+
+    function __construct()
+    {
+        $this->getPostDataImage = new PostHelpers();
+    }
     public function category()
     {
         $titlePass = "Loại";
@@ -23,28 +32,15 @@ class AdminCategoryController extends Controller
         ]);
     }
 
-    
+
 
     public function createCat(Request $request)
     {
-        // $titlePass = "Loại";
 
-        $data = array();
-        $StringHels = new StringHels();
-        $data['names'] = $request->names;
-        if ($request->hasFile("icon")) {
-            $file = $request->file('icon');
-            $fileName = $file->getClientOriginalName();
+       
+        getPostDataImage($request, 'post', Category::class, 'icon', 'admin/images/icon');
 
-            $file->move(public_path("admin/images/icon"), $fileName);
-        }
-        $data['icon'] = $fileName;
-        $data['alias'] = $StringHels->generateAlias($data['names']);
-        $data['location'] = $request->location;
-        $data['status'] = $request->status;
-        $data['classify'] = $request->classify;
 
-        Category::create($data);
         return redirect('/admin/category/list');
     }
 
@@ -52,7 +48,8 @@ class AdminCategoryController extends Controller
     public function deleteCat(Request $request, $id)
     {
 
-        Category::where('id', $id)->delete();
+       
+        getPostDataImage($request, 'delete', Category::class, 'icon', 'admin/images/icon');
 
         return redirect('admin/category/list');
     }
@@ -68,30 +65,8 @@ class AdminCategoryController extends Controller
     public function updateCat(Request $request, $id)
     {
 
-        $data = array();
-        $StringHels = new StringHels();
-        $data['id'] = $request->id;
-        $data['names'] = $request->names;
-
-        if ($request->hasFile("icon")) {
-            $file = $request->file('icon');
-            $fileName = $file->getClientOriginalName();
-
-            $file->move(public_path("admin/images/icon"), $fileName);
-        } else {
-            // $existingCat = Category::find($id);
-            $existingCat = Category::where("id", $id)->first();
-            $existingCat->update($data);
-            $fileName = $existingCat->icon ?? "";
-        }
-
-        $data['icon'] = $fileName;
-        $data['alias'] = $StringHels->generateAlias($data['names']);
-        $data['location'] = $request->location;
-        $data['status'] = $request->status;
-        $data['classify'] = $request->classify;
-
-        Category::where("id", $id)->update($data);
+       
+        getPostDataImage($request, 'put', Category::class, 'icon', 'admin/images/icon');
         return redirect('admin/category/list');
     }
 }

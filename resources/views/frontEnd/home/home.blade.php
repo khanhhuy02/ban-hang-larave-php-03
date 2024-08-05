@@ -61,9 +61,9 @@
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up" data-aos-delay="200">
                                 <!-- Single Prodect -->
                                 <div class="product">
-                                    <div class="thumb" style="height: 180px; ">
-                                        <a class='' href='sanpham/' width="100%" height="100%" >
-                                            <img src="{{asset('admin/images/product')}}/{{$item->image}}" alt="{{$item->name}}" width="70%" height="90%"> 
+                                    <div class="thumb" style="height: 180px;text-align: center; ">
+                                        <a class=''href="{{route('detailed.products',['alias'=> $item->categories->alias,'alias_sp'=> $item->alias_sp ])}}" width="100%" height="100%" >
+                                            <img src="{{asset('admin/images/product')}}/{{$item->image}}" alt="{{$item->name}}" width="70%" height="70%"> 
 
                                         </a>
                                         <span class="badges">
@@ -81,7 +81,7 @@
                                     </div>
 
                                     <div class="content">
-                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias_sp,'alias_sp'=> $item->alias_sp ])}}">{{$item->name}} </a>
+                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias,'alias_sp'=> $item->alias_sp ])}}">{{$item->name}} </a>
                                         </h5>
                                         <span class="price">
                                             <span class="new">{{$item->price_new}}</span>

@@ -68,8 +68,8 @@
                             <!-- Single Prodect -->
                             <div class="product mb-25px">
                                 <div class="thumb">
-                                    <a class='image' href='shop-left-sidebar.html'>
-                                        <img src="{{$item->image}}" alt="Product" />
+                                    <a class='image' href="{{route('detailed.products',['alias'=> $item->categories->alias,'alias_sp'=> $item->alias_sp ]) ?? null}}">
+                                        <img src="{{asset('admin/images/product')}}/{{$item->image}}" alt="Product" />
                                         <!-- <img class="hover-image" src="images/product-image/6.jpg" alt="Product" /> -->
                                     </a>
                                     <span class="badges">
@@ -81,12 +81,12 @@
                                         <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-size-fullscreen"></i></a>
                                         <a class='action compare' href='compare.html' title='Compare'><i class="icon-refresh"></i></a>
                                     </div>
-                                    <button title="Add To Cart" class=" add-to-cart">Add
-                                        To Cart</button>
+                                    <!-- <button title="Add To Cart" class=" add-to-cart">Add
+                                        To Cart</button> -->
                                 </div>
                                 <div class="content">
                                     <h5 class="title">
-                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias_sp,'alias_sp'=> $item->alias_sp ]) ?? null}}">{{$item->name}} </a></h5>
+                                        <h5 class="title"><a href="{{route('detailed.products',['alias'=> $item->categories->alias,'alias_sp'=> $item->alias_sp ]) ?? null}}">{{$item->name}} </a></h5>
                                         <span class="price">
                                             <span class="new">{{ number_format($item['price_new'], 0, ',', '.')}}</span>
                                             <span class="old">{{ number_format($item['price_old'], 0, ',', '.')}}</span>
@@ -122,11 +122,15 @@
                             <h3 class="sidebar-title">Danh mục</h3>
                         </div>
                         <div class="sidebar-widget-category">
+                            <style>
+                                .sidebar-widget-category>ul>li:hover{
+                                    border: 1px solid black;
+                                }
+                            </style>
                             <ul>
                                 @foreach($brand as $key => $item)
-                                <li>
-
-                                    <a href="{{route('shop-cate-brand',['alias'=> $item->categories->alias_sp,'barnd_alias'=> $item->alias])}}" class="selected"><img src="{{asset('admin/images/icon')}}/{{$item->icon}}" alt="" width="100"> </a>
+                                <li style="width: 200px; height: 30px; text-align: center; justify-content: center; padding: 1px; margin-bottom: 5px; border-radius: 20px;">
+                                    <a href="{{route('shop-cate-brand',['alias'=> $item->categories->alias,'barnd_alias'=> $item->alias])}}" class="selected"><img src="{{asset('admin/images/icon')}}/{{$item->icon}}" alt="" width="100"> </a>
                                 </li>
                                 @endforeach
                             </ul>

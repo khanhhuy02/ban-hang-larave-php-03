@@ -233,7 +233,7 @@
                                                                                                 <tbody>
 
                                                                                                     @foreach($order_items as $items)
-                                                                                                    @if($items->orders_id === $item->id)
+                                                                                                    @if($items->orders_id == $item->id && $item->created_at == $items->created_at)
                                                                                                     <tr>
                                                                                                         <td scope="row" tabindex="0" class="sorting_1">
                                                                                                             <img src="{{asset('admin/images/product')}}/{{$items->products->image}}" alt="{{$items->products->name}}" width="90%" height="90%">

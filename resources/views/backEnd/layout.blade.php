@@ -32,10 +32,15 @@
 @case('Danh sách tài khoản')
         @include('backEnd.inc.header')
         @include('backEnd.inc.navbar.menuHome')
-
             <section class='main_content dashboard_part large_header_bg'>
             @yield("conTenPass")
-        
+
+@case('Tin tức')
+        @include('backEnd.inc.header')
+        @include('backEnd.inc.navbar.menuHome')
+            <section class='main_content dashboard_part large_header_bg'>
+            @yield("conTenPass")
+            @include('backEnd.inc.footer')
 @break
     @default
 
